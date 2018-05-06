@@ -1,0 +1,105 @@
+Script started on Fri Feb 10 19:48:30 2017
+[?1034hbash-3.2$ gcc -Wall -g -o overflow overflow.c
+bash-3.2$ gdb overflow
+[?1034hGNU gdb (GDB) 7.12.1
+Copyright (C) 2017 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-apple-darwin16.3.0".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from overflow...Reading symbols from /Users/Mikhail/Desktop/Lab6_209/overflow.dSYM/Contents/Resources/DWARF/overflow...done.
+done.
+(gdb) break main
+Breakpoint 1 at 0x100000b94: file overflow.c, line 7.
+(gdb) break 36
+Breakpoint 2 at 0x100000d7e: file overflow.c, line 36.
+(gdb) next[K[K[K[Krun
+Starting program: /Users/Mikhail/Desktop/Lab6_209/overflow 
+[New Thread 0x1403 of process 2801]
+warning: unhandled dyld version (15)
+
+Thread 2 hit Breakpoint 1, main () at overflow.c:7
+7	    int index = 0;
+(gdb) next
+9	    int before[SIZE] = {10, 10, 10, 10};
+(gdb) display befr[Kore
+1: before = {0, 0, 0, 0}
+(gdb) next
+10	    int a[SIZE] = {0, 0, 0, 0};
+1: before = {10, 10, 10, 10}
+(gdb) display a
+2: a = {0, 0, 0, 0}
+(gdb) next
+11	    int after[SIZE] = {10, 10, 10, 10};
+1: before = {10, 10, 10, 10}
+2: a = {0, 0, 0, 0}
+(gdb) display after
+3: after = {13504, 1, 0, 0}
+(gdb) continue
+Continuing.
+Address of the variables:
+7fff5fbff950 -> &after[0]
+7fff5fbff954 -> &after[1]
+7fff5fbff958 -> &after[2]
+7fff5fbff95c -> &after[3]
+7fff5fbff960 -> &a[0]
+7fff5fbff964 -> &a[1]
+7fff5fbff968 -> &a[2]
+7fff5fbff96c -> &a[3]
+7fff5fbff970 -> &before[0]
+7fff5fbff974 -> &before[1]
+7fff5fbff978 -> &before[2]
+7fff5fbff97c -> &before[3]
+7fff5fbff944 -> &i
+7fff5fbff948 -> &index
+
+Initial values:
+i = 1
+before = {10, 10, 10, 10}
+a = {0, 0, 0, 0}
+after = {10, 10, 10, 10}
+
+
+Thread 2 hit Breakpoint 2, main () at overflow.c:36
+36	    for (i = 0; i < OVERFLOW; i++) {
+1: before = {10, 10, 10, 10}
+2: a = {0, 0, 0, 0}
+3: after = {10, 10, 10, 10}
+(gdb) 
+Continuing.
+i = 0
+before = {10, 10, 10, 10}
+a = {0, 0, 0, 0}
+after = {10, 10, 10, 10}
+i = 1
+before = {10, 10, 10, 10}
+a = {0, 10, 0, 0}
+after = {10, 10, 10, 10}
+i = 2
+before = {10, 10, 10, 10}
+a = {0, 10, 20, 0}
+after = {10, 10, 10, 10}
+i = 3
+before = {10, 10, 10, 10}
+a = {0, 10, 20, 30}
+after = {10, 10, 10, 10}
+i = 4
+before = {40, 10, 10, 10}
+a = {0, 10, 20, 30}
+after = {10, 10, 10, 10}
+7fff5fbff970
+7fff5fbff970
+[Inferior 1 (process 2801) exited normally]
+(gdb) quit
+bash-3.2$ exit
+exit
+
+Script done on Fri Feb 10 19:50:57 2017

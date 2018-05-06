@@ -1,0 +1,27 @@
+===== Testing compilation and error messages =====
+part1 T1: passed
+part1 T2: passed
+part1 T3: passed
+part1 T4: passed
+===== Testing hash computation =====
+test_hash T01: passed
+test_hash T02: passed
+test_hash T03: passed
+test_hash T04: passed
+test_hash T05: passed
+test_hash T06: passed
+test_hash T07: passed
+test_hash T08: passed
+test_hash T09: passed
+test_hash T10: passed
+test_hash T11: passed
+===== Testing hash checks =====
+check_hash T1: passed
+check_hash T2: passed
+check_hash T3: passed
+check_hash T4: passed
+
+part1 (out of 5): 4
+test_hash (out of 5): 5
+check_hash (out of 5): 5
+Score (out of 15): 14

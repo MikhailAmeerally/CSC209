@@ -1,0 +1,30 @@
+Uses only legal libraries: 1 of 1
+Does not use goto inappropriately: 1 of 1
+Checks size and hash before copying file: 3 of 3
+Checks return values on all syscalls: 0 of 3
+Correct explanation to hard link problem: 0 of 2
+
+Creating EmptyDirectory: 2 of 2
+Permissions on EmptyDirectory: 2 of 2
+Number of processes used for EmptyDirectory: 1 of 1
+
+Creating DirWithOneFile: 2 of 2
+Contents of DirWithOneFile/file1: 1 of 1
+Permissions on DirWithOneFile/*: 1 of 1
+Number of processes used: 1 of 1
+
+Creating DirWithFiles: 1 of 1
+Contents of DirWithFiles/*: 0 of 1
+
+Creating DirWithSubDir: 1 of 1
+Number of Processes Used: 2 of 2
+
+Creating TestDirectory: 1 of 1
+Contents of TestDirectory/*/*: 1 of 1
+
+Creating TestDirectory2: 2 of 2
+Number of Processes Used: 2 of 2
+
+Handles Error Cases: 2 of 2
+
+Total Score: 27 of 33

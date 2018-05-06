@@ -1,0 +1,17 @@
+Makefile has functional "clean": 2 of 2
+Makefile builds all targets: 3 of 3
+Client sends file struct for EmpytDirectory: 0 of 5
+Client sends file structs for DirWithSubDir: 0 of 3
+EmptyDirectory transferred: 3 of 3
+Permissions set on EmptyDirectory: 2 of 2
+DirWitOneFile transferred: 2 of 2
+Permissions set on DirWithOneFile: 1 of 1
+File contents correct for DirWithOneFile: 0 of 2
+DirWithSubDir transferred: 2 of 2
+TestDirectory transferred: 1 of 1
+TestDirectory2 transferred: 2 of 2
+Test failed to complete ...
+Permissions set on TestDirectory2: 0 of 1
+Test failed to complete ...
+File contents correct for TestDirectory 2: 0 of 1
+Total Score: 18 of 30

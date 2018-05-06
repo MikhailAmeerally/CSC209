@@ -1,0 +1,49 @@
+Note: In the raw test files, you will see separate tests for
+'tree generation' and 'tree printing.' The former uses both your tree
+generation and your tree printing functions, and it's what we used
+for marking whether your program could create the correct structure.
+The 'tree printing' test used our tree generation method and your
+print function; it was not used for marking, but it might help you
+identify where the error is in your code.
+
+Note 2: The tests for filenames, permissions, and hash values rely
+on our ability to traverse the data structures you've created. We
+have manually updated several submissions, but if you used a dummy
+head node (or other more advanced linked list structure) and lost
+points on those fields, you may be able to get points refunded
+if you can demonstrate that the correct fields are stored. Double
+check them and submit a remark request if necessary.
+
+Error message for invalid argument: 4 of 4
+Uses only legal libraries: 4 of 4
+
+Case: Empty Directory
+Generating and printing the tree for a single empty directory: 4 of 4
+Storing single directory name correctly: 3 of 3
+Storing permissions for a single directory correctly: 3 of 3
+
+Case: Directory with One File
+Generating and printing a tree for directory and file: 4 of 4
+Storing file name correctly: 0 of 2
+Storing permissions for a file correctly: 2 of 2
+Storing hash for a file correctly: 0 of 2
+
+Case: Directory with Multiple Files
+Generating and printing a tree for directory with multiple files: 2 of 2
+
+Case: Directory with Dot File
+Ignoring dot file: 1 of 1
+
+Case: Directory with Subdirectory
+Generating and printing a tree for a directory with a subdir: 1 of 1
+
+Case: Directory with Multiple Subdirectories
+Generating and printing a tree for multiple subdirectories: 1 of 1
+
+Case: Directory with Subdirectories with Files
+Generating a tree with files: 1 of 1
+
+Case: Full Test
+Generating and printing the tree: 4 of 4
+Storing filenames: 0 of 2
+Total Score: 34 of 40

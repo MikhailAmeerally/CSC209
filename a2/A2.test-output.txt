@@ -1,0 +1,388 @@
+=======================================================================================================================================================
+StudentID: ameeral2
+
+===== Testing compilation and error messages =====
+Test 1: print_ftree with illegal argument should print an error message to standard error:
+part1 T1: passed
+
+Test 2: Checking for incorrect include statements:
+part1 T2: passed
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+$ ls -Rali EmptyDirectory
+total 0
+47129492 drwxr-xr-x   2 peters43  staff    68  1 Apr 00:36 .
+47080404 drwxr-xr-x  43 peters43  staff  1462  1 Apr 00:36 ..
+
+===== Testing tree generation =====
+The printed outputs match!
+
+===== Testing tree printing =====
+The printed outputs match!
+
+===== Testing data structure correctness (filenames) =====
+Comparing the computed tree versus the expected tree ...
+The two trees are equal!
+
+===== Testing data structure correctness (permissions) =====
+Comparing the computed tree versus the expected tree ...
+The two trees are equal!
+
+===== Testing data structure correctness (hash values) =====
+Comparing the computed tree versus the expected tree ...
+The two trees are equal!
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+$ ls -Rali DirWithOneFile
+total 8
+47129493 drwxr-xr-x   3 peters43  staff   102  1 Apr 00:36 .
+47080404 drwxr-xr-x  43 peters43  staff  1462  1 Apr 00:36 ..
+47129494 -rw-r--r--   1 peters43  staff   512  1 Apr 00:36 file1
+
+===== Testing tree generation =====
+The printed outputs match!
+
+===== Testing tree printing =====
+The printed outputs match!
+
+===== Testing data structure correctness (filenames) =====
+Comparing the computed tree versus the expected tree ...
+[ERROR]: Expected:	file1
+	 Computed:	DirWithOneFile/file1
+[ERROR]: Error while iterating through directory (DirWithOneFile) ...
+[ERROR]: The expected directory contains the following entries:
+	 file1
+[ERROR]: The computed directory contains the following entries:
+	 DirWithOneFile/file1
+
+===== Testing data structure correctness (permissions) =====
+Comparing the computed tree versus the expected tree ...
+The two trees are equal!
+
+===== Testing data structure correctness (hash values) =====
+Comparing the computed tree versus the expected tree ...
+[ERROR]: Hash value mismatch for the tree entry associated with (file1) ...
+[ERROR]: Expected:	bd 3d 59 df 97 46 f2 ed 
+	 Computed:	86 8a 27 7c ca 2b 95 7d 
+[ERROR]: Error while iterating through directory (DirWithOneFile) ...
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+$ ls -Rali DirWithFiles
+total 24
+47129495 drwxr-xr-x   5 peters43  staff   170  1 Apr 00:36 .
+47080404 drwxr-xr-x  43 peters43  staff  1462  1 Apr 00:36 ..
+47129496 -rwxr-xr-x   1 peters43  staff  1024  1 Apr 00:36 file1
+47129497 -rw-r--r--   1 peters43  staff  1024  1 Apr 00:36 file2
+47129498 -r--r--r--   1 peters43  staff  1024  1 Apr 00:36 file3
+
+===== Testing tree generation =====
+The printed outputs match!
+
+===== Testing tree printing =====
+The printed outputs match!
+
+===== Testing data structure correctness (filenames) =====
+Comparing the computed tree versus the expected tree ...
+[ERROR]: Expected:	file1
+	 Computed:	DirWithFiles/file1
+[ERROR]: Error while iterating through directory (DirWithFiles) ...
+[ERROR]: The expected directory contains the following entries:
+	 file1 file2 file3
+[ERROR]: The computed directory contains the following entries:
+	 DirWithFiles/file1 DirWithFiles/file2 DirWithFiles/file3
+
+===== Testing data structure correctness (permissions) =====
+Comparing the computed tree versus the expected tree ...
+The two trees are equal!
+
+===== Testing data structure correctness (hash values) =====
+Comparing the computed tree versus the expected tree ...
+[ERROR]: Hash value mismatch for the tree entry associated with (file1) ...
+[ERROR]: Expected:	13 f0 0f fb aa 22 a2 e6 
+	 Computed:	72 cd be be 4e 72 ce 76 
+[ERROR]: Error while iterating through directory (DirWithFiles) ...
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+$ ls -Rali DirWithDotFile
+total 16
+47129499 drwxr-xr-x   4 peters43  staff   136  1 Apr 00:36 .
+47080404 drwxr-xr-x  43 peters43  staff  1462  1 Apr 00:36 ..
+47129501 -rw-r--r--   1 peters43  staff  1024  1 Apr 00:36 .file1
+47129500 -rw-r--r--   1 peters43  staff  1024  1 Apr 00:36 file1
+
+===== Testing tree generation =====
+The printed outputs match!
+
+===== Testing tree printing =====
+The printed outputs match!
+
+===== Testing data structure correctness (filenames) =====
+Comparing the computed tree versus the expected tree ...
+[ERROR]: Expected:	file1
+	 Computed:	DirWithDotFile/file1
+[ERROR]: Error while iterating through directory (DirWithDotFile) ...
+[ERROR]: The expected directory contains the following entries:
+	 file1
+[ERROR]: The computed directory contains the following entries:
+	 DirWithDotFile/file1
+
+===== Testing data structure correctness (permissions) =====
+Comparing the computed tree versus the expected tree ...
+The two trees are equal!
+
+===== Testing data structure correctness (hash values) =====
+Comparing the computed tree versus the expected tree ...
+[ERROR]: Hash value mismatch for the tree entry associated with (file1) ...
+[ERROR]: Expected:	d5 e6 44 1d a4 c7 4c f4 
+	 Computed:	40 80 fb 1e 1f 28 0e 01 
+[ERROR]: Error while iterating through directory (DirWithDotFile) ...
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+$ ls -Rali DirWithSubDir
+total 0
+47129502 drwxr-xr-x   3 peters43  staff   102  1 Apr 00:36 .
+47080404 drwxr-xr-x  43 peters43  staff  1462  1 Apr 00:36 ..
+47129503 drwxr-xr-x   4 peters43  staff   136  1 Apr 00:36 SubDir
+
+DirWithSubDir/SubDir:
+total 16
+47129503 drwxr-xr-x  4 peters43  staff   136  1 Apr 00:36 .
+47129502 drwxr-xr-x  3 peters43  staff   102  1 Apr 00:36 ..
+47129504 -rw-r--r--  1 peters43  staff  4096  1 Apr 00:36 file1
+47129505 -rw-r--r--  1 peters43  staff  1024  1 Apr 00:36 file2
+
+===== Testing tree generation =====
+The printed outputs match!
+
+===== Testing tree printing =====
+The printed outputs match!
+
+===== Testing data structure correctness (filenames) =====
+Comparing the computed tree versus the expected tree ...
+[ERROR]: Expected:	SubDir
+	 Computed:	DirWithSubDir/SubDir
+[ERROR]: Error while iterating through directory (DirWithSubDir) ...
+[ERROR]: The expected directory contains the following entries:
+	 SubDir
+[ERROR]: The computed directory contains the following entries:
+	 DirWithSubDir/SubDir
+
+===== Testing data structure correctness (permissions) =====
+Comparing the computed tree versus the expected tree ...
+The two trees are equal!
+
+===== Testing data structure correctness (hash values) =====
+Comparing the computed tree versus the expected tree ...
+[ERROR]: Hash value mismatch for the tree entry associated with (file1) ...
+[ERROR]: Expected:	45 a9 4a 22 d9 12 d1 8f 
+	 Computed:	f9 43 96 84 1d 0e 9f 4a 
+[ERROR]: Error while iterating through directory (SubDir) ...
+[ERROR]: Error while iterating through directory (DirWithSubDir) ...
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+$ ls -Rali TestDirectory
+total 24
+47129506 drwxr-xr-x   6 peters43  staff   204  1 Apr 00:36 .
+47080404 drwxr-xr-x  43 peters43  staff  1462  1 Apr 00:36 ..
+47129510 drwxr-xr-x   4 peters43  staff   136  1 Apr 00:36 SubDirectory
+47129507 -rwxr-xr-x   1 peters43  staff  1024  1 Apr 00:36 file1
+47129508 -rw-r--r--   1 peters43  staff  1024  1 Apr 00:36 file2
+47129509 -r--r--r--   1 peters43  staff  1024  1 Apr 00:36 file3
+
+TestDirectory/SubDirectory:
+total 16
+47129510 drwxr-xr-x  4 peters43  staff   136  1 Apr 00:36 .
+47129506 drwxr-xr-x  6 peters43  staff   204  1 Apr 00:36 ..
+47129511 -rw-r--r--  1 peters43  staff   512  1 Apr 00:36 file1
+47129512 -rw-r--r--  1 peters43  staff  4096  1 Apr 00:36 file2
+
+===== Testing tree generation =====
+The printed outputs match!
+
+===== Testing tree printing =====
+The printed outputs match!
+
+===== Testing data structure correctness (filenames) =====
+Comparing the computed tree versus the expected tree ...
+[ERROR]: Expected:	file1
+	 Computed:	TestDirectory/file1
+[ERROR]: Error while iterating through directory (TestDirectory) ...
+[ERROR]: The expected directory contains the following entries:
+	 file1 file2 file3 SubDirectory
+[ERROR]: The computed directory contains the following entries:
+	 TestDirectory/file1 TestDirectory/file2 TestDirectory/file3 TestDirectory/SubDirectory
+
+===== Testing data structure correctness (permissions) =====
+Comparing the computed tree versus the expected tree ...
+The two trees are equal!
+
+===== Testing data structure correctness (hash values) =====
+Comparing the computed tree versus the expected tree ...
+[ERROR]: Hash value mismatch for the tree entry associated with (file1) ...
+[ERROR]: Expected:	13 f0 0f fb aa 22 a2 e6 
+	 Computed:	72 cd be be 4e 72 ce 76 
+[ERROR]: Error while iterating through directory (TestDirectory) ...
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+$ ls -Rali TestDirectory2
+total 24
+47129513 drwxr-xr-x   6 peters43  staff   204  1 Apr 00:36 .
+47080404 drwxr-xr-x  43 peters43  staff  1462  1 Apr 00:36 ..
+47129517 drwxr-xr-x   6 peters43  staff   204  1 Apr 00:36 SubDirectory
+47129514 -rwxr-xr-x   1 peters43  staff  1024  1 Apr 00:36 file1
+47129515 -rw-r--r--   1 peters43  staff  1024  1 Apr 00:36 file2
+47129516 -r--r--r--   1 peters43  staff  1024  1 Apr 00:36 file3
+
+TestDirectory2/SubDirectory:
+total 16
+47129517 drwxr-xr-x  6 peters43  staff   204  1 Apr 00:36 .
+47129513 drwxr-xr-x  6 peters43  staff   204  1 Apr 00:36 ..
+47129520 drwxr-xr-x  6 peters43  staff   204  1 Apr 00:36 TestDirectory
+47129527 drwxr-xr-x  6 peters43  staff   204  1 Apr 00:36 TestSubDirectory
+47129518 -rw-r--r--  1 peters43  staff   512  1 Apr 00:36 file1
+47129519 -rw-r--r--  1 peters43  staff  4096  1 Apr 00:36 file2
+
+TestDirectory2/SubDirectory/TestDirectory:
+total 24
+47129520 drwxr-xr-x  6 peters43  staff   204  1 Apr 00:36 .
+47129517 drwxr-xr-x  6 peters43  staff   204  1 Apr 00:36 ..
+47129524 drwxr-xr-x  4 peters43  staff   136  1 Apr 00:36 SubDirectory
+47129521 -rwxr-xr-x  1 peters43  staff  1024  1 Apr 00:36 file1
+47129522 -rw-r--r--  1 peters43  staff  1024  1 Apr 00:36 file2
+47129523 -r--r--r--  1 peters43  staff  1024  1 Apr 00:36 file3
+
+TestDirectory2/SubDirectory/TestDirectory/SubDirectory:
+total 16
+47129524 drwxr-xr-x  4 peters43  staff   136  1 Apr 00:36 .
+47129520 drwxr-xr-x  6 peters43  staff   204  1 Apr 00:36 ..
+47129525 -rw-r--r--  1 peters43  staff   512  1 Apr 00:36 file1
+47129526 -rw-r--r--  1 peters43  staff  4096  1 Apr 00:36 file2
+
+TestDirectory2/SubDirectory/TestSubDirectory:
+total 24
+47129527 drwxr-xr-x  6 peters43  staff   204  1 Apr 00:36 .
+47129517 drwxr-xr-x  6 peters43  staff   204  1 Apr 00:36 ..
+47129531 drwxr-xr-x  5 peters43  staff   170  1 Apr 00:36 SubSubDirectory
+47129528 -rwxr-xr-x  1 peters43  staff  1024  1 Apr 00:36 file1
+47129529 -rw-r--r--  1 peters43  staff  1024  1 Apr 00:36 file2
+47129530 -r--r--r--  1 peters43  staff  1024  1 Apr 00:36 file3
+
+TestDirectory2/SubDirectory/TestSubDirectory/SubSubDirectory:
+total 24
+47129531 drwxr-xr-x  5 peters43  staff   170  1 Apr 00:36 .
+47129527 drwxr-xr-x  6 peters43  staff   204  1 Apr 00:36 ..
+47129532 -rwxr-xr-x  1 peters43  staff  1024  1 Apr 00:36 file1
+47129533 -rw-r--r--  1 peters43  staff  1024  1 Apr 00:36 file2
+47129534 -r--r--r--  1 peters43  staff  1024  1 Apr 00:36 file3
+
+===== Testing tree generation =====
+The printed outputs match!
+
+===== Testing tree printing =====
+The printed outputs match!
+
+===== Testing data structure correctness (filenames) =====
+Comparing the computed tree versus the expected tree ...
+[ERROR]: Expected:	file1
+	 Computed:	TestDirectory2/file1
+[ERROR]: Error while iterating through directory (TestDirectory2) ...
+[ERROR]: The expected directory contains the following entries:
+	 file1 file2 file3 SubDirectory
+[ERROR]: The computed directory contains the following entries:
+	 TestDirectory2/file1 TestDirectory2/file2 TestDirectory2/file3 TestDirectory2/SubDirectory
+
+===== Testing data structure correctness (permissions) =====
+Comparing the computed tree versus the expected tree ...
+The two trees are equal!
+
+===== Testing data structure correctness (hash values) =====
+Comparing the computed tree versus the expected tree ...
+[ERROR]: Hash value mismatch for the tree entry associated with (file1) ...
+[ERROR]: Expected:	13 f0 0f fb aa 22 a2 e6 
+	 Computed:	72 cd be be 4e 72 ce 76 
+[ERROR]: Error while iterating through directory (TestDirectory2) ...
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+$ ls -Rali FullTestDirectory
+total 32
+47129535 drwxr-xr-x   7 peters43  staff   238  1 Apr 00:36 .
+47080404 drwxr-xr-x  43 peters43  staff  1462  1 Apr 00:36 ..
+47129539 drwxr-xr-x   8 peters43  staff   272  1 Apr 00:36 SubDirectory
+47129536 -rwxr-xr-x   2 peters43  staff  1024  1 Apr 00:36 file1
+47129537 -rw-r--r--   2 peters43  staff  1024  1 Apr 00:36 file2
+47129538 -r--r--r--   2 peters43  staff  1024  1 Apr 00:36 file3
+47129538 -r--r--r--   2 peters43  staff  1024  1 Apr 00:36 linkToFile3
+
+FullTestDirectory/SubDirectory:
+total 32
+47129539 drwxr-xr-x  8 peters43  staff   272  1 Apr 00:36 .
+47129535 drwxr-xr-x  7 peters43  staff   238  1 Apr 00:36 ..
+47129542 drwxr-xr-x  6 peters43  staff   204  1 Apr 00:36 TestDirectory
+47129549 drwxr-xr-x  8 peters43  staff   272  1 Apr 00:36 TestSubDirectory
+47129540 -rw-r--r--  2 peters43  staff   512  1 Apr 00:36 file1
+47129541 -rw-r--r--  2 peters43  staff  4096  1 Apr 00:36 file2
+47129536 -rwxr-xr-x  2 peters43  staff  1024  1 Apr 00:36 linkToParentFile1
+47129537 -rw-r--r--  2 peters43  staff  1024  1 Apr 00:36 linkToParentFile2
+
+FullTestDirectory/SubDirectory/TestDirectory:
+total 24
+47129542 drwxr-xr-x  6 peters43  staff   204  1 Apr 00:36 .
+47129539 drwxr-xr-x  8 peters43  staff   272  1 Apr 00:36 ..
+47129546 drwxr-xr-x  4 peters43  staff   136  1 Apr 00:36 SubDirectory
+47129543 -rwxr-xr-x  1 peters43  staff  1024  1 Apr 00:36 file1
+47129544 -rw-r--r--  1 peters43  staff  1024  1 Apr 00:36 file2
+47129545 -r--r--r--  1 peters43  staff  1024  1 Apr 00:36 file3
+
+FullTestDirectory/SubDirectory/TestDirectory/SubDirectory:
+total 16
+47129546 drwxr-xr-x  4 peters43  staff   136  1 Apr 00:36 .
+47129542 drwxr-xr-x  6 peters43  staff   204  1 Apr 00:36 ..
+47129547 -rw-r--r--  1 peters43  staff   512  1 Apr 00:36 file1
+47129548 -rw-r--r--  1 peters43  staff  4096  1 Apr 00:36 file2
+
+FullTestDirectory/SubDirectory/TestSubDirectory:
+total 40
+47129549 drwxr-xr-x  8 peters43  staff   272  1 Apr 00:36 .
+47129539 drwxr-xr-x  8 peters43  staff   272  1 Apr 00:36 ..
+47129553 drwxr-xr-x  5 peters43  staff   170  1 Apr 00:36 SubSubDirectory
+47129550 -rwxr-xr-x  1 peters43  staff  1024  1 Apr 00:36 file1
+47129551 -rw-r--r--  1 peters43  staff  1024  1 Apr 00:36 file2
+47129552 -r--r--r--  1 peters43  staff  1024  1 Apr 00:36 file3
+47129540 -rw-r--r--  2 peters43  staff   512  1 Apr 00:36 linkToParentFile1
+47129541 -rw-r--r--  2 peters43  staff  4096  1 Apr 00:36 linkToParentFile2
+
+FullTestDirectory/SubDirectory/TestSubDirectory/SubSubDirectory:
+total 24
+47129553 drwxr-xr-x  5 peters43  staff   170  1 Apr 00:36 .
+47129549 drwxr-xr-x  8 peters43  staff   272  1 Apr 00:36 ..
+47129554 -rwxr-xr-x  1 peters43  staff  1024  1 Apr 00:36 file1
+47129555 -rw-r--r--  1 peters43  staff  1024  1 Apr 00:36 file2
+47129556 -r--r--r--  1 peters43  staff  1024  1 Apr 00:36 file3
+
+===== Testing tree generation =====
+The printed outputs match!
+
+===== Testing tree printing =====
+The printed outputs match!
+
+===== Testing data structure correctness (filenames) =====
+Comparing the computed tree versus the expected tree ...
+[ERROR]: Expected:	file1
+	 Computed:	FullTestDirectory/file1
+[ERROR]: Error while iterating through directory (FullTestDirectory) ...
+[ERROR]: The expected directory contains the following entries:
+	 file1 file2 file3 linkToFile3 SubDirectory
+[ERROR]: The computed directory contains the following entries:
+	 FullTestDirectory/file1 FullTestDirectory/file2 FullTestDirectory/file3 FullTestDirectory/linkToFile3 FullTestDirectory/SubDirectory
+
+===== Testing data structure correctness (permissions) =====
+Comparing the computed tree versus the expected tree ...
+The two trees are equal!
+
+===== Testing data structure correctness (hash values) =====
+Comparing the computed tree versus the expected tree ...
+[ERROR]: Hash value mismatch for the tree entry associated with (file1) ...
+[ERROR]: Expected:	13 f0 0f fb aa 22 a2 e6 
+	 Computed:	72 cd be be 4e 72 ce 76 
+[ERROR]: Error while iterating through directory (FullTestDirectory) ...

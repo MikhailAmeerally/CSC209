@@ -1,0 +1,696 @@
+==========
+StudentID: repo_ameeral2
+
+===== Testing Makefile =====
+[SUCCESS]: clean removed object files and executables
+[SUCCESS]: executables built with submitted makefile
+[ERROR]: warnings during compilation with solution makefile:
+gcc -Wall -std=gnu99 -c rcopy_client.c
+gcc -Wall -std=gnu99 -c ftree.c
+ftree.c: In function ‘read_from’:
+ftree.c:223:8: warning: unused variable ‘send’ [-Wunused-variable]
+    int send = write(sockets[client_index].sock_fd, &response, sizeof(int));
+        ^
+ftree.c:73:9: warning: unused variable ‘size’ [-Wunused-variable]
+     int size, type, num_read = 0;
+         ^
+ftree.c: In function ‘copy_dir’:
+ftree.c:395:14: warning: unused variable ‘waiting’ [-Wunused-variable]
+          int waiting = read(sock_fd, &response, sizeof(int));
+              ^
+ftree.c:336:6: warning: unused variable ‘waiting’ [-Wunused-variable]
+  int waiting = read(sock_fd, &response, sizeof(int));
+      ^
+ftree.c: In function ‘rcopy_client’:
+ftree.c:581:11: warning: unused variable ‘waiting’ [-Wunused-variable]
+       int waiting = read(sock_fd, &response, sizeof(int));
+           ^
+gcc -Wall -std=gnu99 -c hash_functions.c
+gcc -Wall -std=gnu99 -o rcopy_client rcopy_client.o ftree.o hash_functions.o
+gcc -Wall -std=gnu99 -c rcopy_server.c
+gcc -Wall -std=gnu99 -o rcopy_server rcopy_server.o ftree.o hash_functions.o
+gcc -Wall -std=gnu99 -c sol_ftree.c
+gcc -Wall -std=gnu99 -o sol_client rcopy_client.o sol_ftree.o hash_functions.o
+gcc -Wall -std=gnu99 -o sol_server rcopy_server.o sol_ftree.o hash_functions.o
+
+
+===== Testing File Checking Protocol =====
+== EmptyDirectory ==
+
+[ERROR]: The test program did not terminate after 10 seconds of execution ...
+== DirWithSubDir ==
+
+[ERROR]: The test program did not terminate after 10 seconds of execution ...
+
+===== Testing File Transfer =====
+----------
+$ ls -Rali EmptyDirectory
+EmptyDirectory:
+total 8
+31084417 drwx------  2 209 108 4096 Apr 13 23:19 .
+29363094 drwx------ 10 209 108 4096 Apr 13 23:19 ..
+SRC: EmptyDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 45802
+SRC: EmptyDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 45802
+Copy completed successfully
+
+Checking structure of copied directory ...
+[SUCCESS] File structure matches
+
+Checking structure of copied directory ...
+[SUCCESS] File structure and permissions match
+
+Checking content of files ...
+[SUCCESS] File content matches
+
+----------
+$ ls -Rali DirWithOneFile
+DirWithOneFile:
+total 12
+31084418 drwx------  2 209 108 4096 Apr 13 23:19 .
+29363094 drwx------ 11 209 108 4096 Apr 13 23:19 ..
+31084419 -rw-------  1 209 108  512 Apr 13 23:19 file1
+lstat: No such file or directory
+SRC: DirWithOneFile
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 22766
+SRC: DirWithOneFile
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 22766
+Copy completed successfully
+SRC: DirWithOneFile
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 22766
+SRC: DirWithOneFile
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 22766
+
+Checking structure of copied directory ...
+[SUCCESS] File structure matches
+
+Checking structure of copied directory ...
+[SUCCESS] File structure and permissions match
+
+Checking content of files ...
+Files DirWithOneFile/file1 and TestDest/DirWithOneFile/file1 differ
+[ERROR] File structure or content fails to match
+
+----------
+$ ls -Rali DirWithSubDir
+DirWithSubDir:
+total 12
+31477253 drwx------  3 209 108 4096 Apr 13 23:19 .
+29363094 drwx------ 11 209 108 4096 Apr 13 23:19 ..
+31609758 drwx------  2 209 108 4096 Apr 13 23:19 SubDir
+
+DirWithSubDir/SubDir:
+total 16
+31609758 drwx------ 2 209 108 4096 Apr 13 23:19 .
+31477253 drwx------ 3 209 108 4096 Apr 13 23:19 ..
+31609761 -rw------- 1 209 108 4096 Apr 13 23:19 file1
+31609762 -rw------- 1 209 108 1024 Apr 13 23:19 file2
+lstat: No such file or directory
+lstat: No such file or directory
+SRC: DirWithSubDir
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 11894
+SRC: DirWithSubDir
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 11894
+SRC: DirWithSubDir/SubDir
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/DirWithSubDir
+IP: 127.0.0.1
+PORT: 11894
+Copy completed successfully
+
+SRC: DirWithSubDir
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 11894
+SRC: DirWithSubDir
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 11894
+SRC: DirWithSubDir/SubDir
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/DirWithSubDir
+IP: 127.0.0.1
+PORT: 11894
+SRC: DirWithSubDir
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 11894
+SRC: DirWithSubDir
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 11894
+SRC: DirWithSubDir/SubDir
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/DirWithSubDir
+IP: 127.0.0.1
+PORT: 11894
+Checking structure of copied directory ...
+[SUCCESS] File structure matches
+
+Checking structure of copied directory ...
+[SUCCESS] File structure and permissions match
+
+Checking content of files ...
+Files DirWithSubDir/SubDir/file2 and TestDest/DirWithSubDir/SubDir/file2 differ
+[ERROR] File structure or content fails to match
+
+----------
+$ ls -Rali TestDirectory
+TestDirectory:
+total 24
+31609763 drwx------  3 209 108 4096 Apr 13 23:19 .
+29363094 drwx------ 11 209 108 4096 Apr 13 23:19 ..
+31609767 -rwx------  1 209 108 1024 Apr 13 23:19 file1
+31610031 -rw-------  1 209 108 1024 Apr 13 23:19 file2
+31609765 -r--------  1 209 108 1024 Apr 13 23:19 file3
+31725933 drwx------  2 209 108 4096 Apr 13 23:19 SubDirectory
+
+TestDirectory/SubDirectory:
+total 16
+31725933 drwx------ 2 209 108 4096 Apr 13 23:19 .
+31609763 drwx------ 3 209 108 4096 Apr 13 23:19 ..
+31726058 -rw------- 1 209 108  512 Apr 13 23:19 file1
+31726062 -rw------- 1 209 108 4096 Apr 13 23:19 file2
+lstat: No such file or directory
+lstat: No such file or directory
+lstat: No such file or directory
+lstat: No such file or directory
+lstat: No such file or directory
+SRC: TestDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 57906
+SRC: TestDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 57906
+SRC: TestDirectory/SubDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/TestDirectory
+IP: 127.0.0.1
+PORT: 57906
+Copy completed successfully
+
+SRC: TestDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 57906
+SRC: TestDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 57906
+SRC: TestDirectory/SubDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/TestDirectory
+IP: 127.0.0.1
+PORT: 57906
+SRC: TestDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 57906
+SRC: TestDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 57906
+SRC: TestDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 57906
+SRC: TestDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 57906
+SRC: TestDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 57906
+SRC: TestDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 57906
+SRC: TestDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 57906
+SRC: TestDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 57906
+SRC: TestDirectory/SubDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/TestDirectory
+IP: 127.0.0.1
+PORT: 57906
+Checking structure of copied directory ...
+[SUCCESS] File structure matches
+
+Checking structure of copied directory ...
+2c2
+< -rwx------ file1
+---
+> -rw------- file1
+4c4
+< -r-------- file3
+---
+> -rw------- file3
+[ERROR] File structure or permissions fail to match
+
+Checking content of files ...
+Files TestDirectory/SubDirectory/file2 and TestDest/TestDirectory/SubDirectory/file2 differ
+[ERROR] File structure or content fails to match
+
+----------
+$ ls -Rali TestDirectory2
+TestDirectory2:
+total 24
+31726068 drwx------  3 209 108 4096 Apr 13 23:19 .
+29363094 drwx------ 11 209 108 4096 Apr 13 23:19 ..
+31726075 -rwx------  1 209 108 1024 Apr 13 23:19 file1
+31726077 -rw-------  1 209 108 1024 Apr 13 23:19 file2
+31726069 -r--------  1 209 108 1024 Apr 13 23:19 file3
+31868013 drwx------  4 209 108 4096 Apr 13 23:19 SubDirectory
+
+TestDirectory2/SubDirectory:
+total 24
+31868013 drwx------ 4 209 108 4096 Apr 13 23:19 .
+31726068 drwx------ 3 209 108 4096 Apr 13 23:19 ..
+31868016 -rw------- 1 209 108  512 Apr 13 23:19 file1
+31868017 -rw------- 1 209 108 4096 Apr 13 23:19 file2
+31868018 drwx------ 3 209 108 4096 Apr 13 23:19 TestDirectory
+31986041 drwx------ 3 209 108 4096 Apr 13 23:19 TestSubDirectory
+
+TestDirectory2/SubDirectory/TestDirectory:
+total 24
+31868018 drwx------ 3 209 108 4096 Apr 13 23:19 .
+31868013 drwx------ 4 209 108 4096 Apr 13 23:19 ..
+31868033 -rwx------ 1 209 108 1024 Apr 13 23:19 file1
+31868035 -rw------- 1 209 108 1024 Apr 13 23:19 file2
+31868019 -r-------- 1 209 108 1024 Apr 13 23:19 file3
+31868036 drwx------ 2 209 108 4096 Apr 13 23:19 SubDirectory
+
+TestDirectory2/SubDirectory/TestDirectory/SubDirectory:
+total 16
+31868036 drwx------ 2 209 108 4096 Apr 13 23:19 .
+31868018 drwx------ 3 209 108 4096 Apr 13 23:19 ..
+31868037 -rw------- 1 209 108  512 Apr 13 23:19 file1
+31868038 -rw------- 1 209 108 4096 Apr 13 23:19 file2
+
+TestDirectory2/SubDirectory/TestSubDirectory:
+total 24
+31986041 drwx------ 3 209 108 4096 Apr 13 23:19 .
+31868013 drwx------ 4 209 108 4096 Apr 13 23:19 ..
+31998545 -rwx------ 1 209 108 1024 Apr 13 23:19 file1
+31998546 -rw------- 1 209 108 1024 Apr 13 23:19 file2
+31998544 -r-------- 1 209 108 1024 Apr 13 23:19 file3
+31998549 drwx------ 2 209 108 4096 Apr 13 23:19 SubSubDirectory
+
+TestDirectory2/SubDirectory/TestSubDirectory/SubSubDirectory:
+total 20
+31998549 drwx------ 2 209 108 4096 Apr 13 23:19 .
+31986041 drwx------ 3 209 108 4096 Apr 13 23:19 ..
+31998591 -rwx------ 1 209 108 1024 Apr 13 23:19 file1
+31998613 -rw------- 1 209 108 1024 Apr 13 23:19 file2
+31998564 -r-------- 1 209 108 1024 Apr 13 23:19 file3
+lstat: No such file or directory
+lstat: No such file or directory
+lstat: No such file or directory
+lstat: No such file or directory
+lstat: No such file or directory
+lstat: No such file or directory
+lstat: No such file or directory
+lstat: No such file or directory
+lstat: No such file or directory
+lstat: No such file or directory
+lstat: No such file or directory
+lstat: No such file or directory
+lstat: No such file or directory
+lstat: No such file or directory
+lstat: No such file or directory
+lstat: No such file or directory
+SRC: TestDirectory2
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2/SubDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/TestDirectory2
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2/SubDirectory/TestSubDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/TestDirectory2/SubDirectory
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2/SubDirectory/TestSubDirectory/SubSubDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/TestDirectory2/SubDirectory/TestSubDirectory
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2/SubDirectory/TestDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/TestDirectory2/SubDirectory
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2/SubDirectory/TestDirectory/SubDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/TestDirectory2/SubDirectory/TestDirectory
+IP: 127.0.0.1
+PORT: 51231
+Copy completed successfully
+
+SRC: TestDirectory2
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2/SubDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/TestDirectory2
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2/SubDirectory/TestSubDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/TestDirectory2/SubDirectory
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2/SubDirectory/TestSubDirectory/SubSubDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/TestDirectory2/SubDirectory/TestSubDirectory
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2/SubDirectory/TestDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/TestDirectory2/SubDirectory
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2/SubDirectory/TestDirectory/SubDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/TestDirectory2/SubDirectory/TestDirectory
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2/SubDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/TestDirectory2
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2/SubDirectory/TestSubDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/TestDirectory2/SubDirectory
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2/SubDirectory/TestSubDirectory/SubSubDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/TestDirectory2/SubDirectory/TestSubDirectory
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2/SubDirectory/TestDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/TestDirectory2/SubDirectory
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2/SubDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/TestDirectory2
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2/SubDirectory/TestSubDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/TestDirectory2/SubDirectory
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2/SubDirectory/TestSubDirectory/SubSubDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/TestDirectory2/SubDirectory/TestSubDirectory
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2/SubDirectory/TestDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/TestDirectory2/SubDirectory
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2/SubDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/TestDirectory2
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2/SubDirectory/TestSubDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/TestDirectory2/SubDirectory
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2/SubDirectory/TestSubDirectory/SubSubDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/TestDirectory2/SubDirectory/TestSubDirectory
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2/SubDirectory/TestDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/TestDirectory2/SubDirectory
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2/SubDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/TestDirectory2
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2/SubDirectory/TestSubDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/TestDirectory2/SubDirectory
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2/SubDirectory/TestSubDirectory/SubSubDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/TestDirectory2/SubDirectory/TestSubDirectory
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2/SubDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/TestDirectory2
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2/SubDirectory/TestSubDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/TestDirectory2/SubDirectory
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2/SubDirectory/TestSubDirectory/SubSubDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/TestDirectory2/SubDirectory/TestSubDirectory
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2/SubDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/TestDirectory2
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2/SubDirectory/TestSubDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/TestDirectory2/SubDirectory
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2/SubDirectory/TestSubDirectory/SubSubDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/TestDirectory2/SubDirectory/TestSubDirectory
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2/SubDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/TestDirectory2
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2/SubDirectory/TestSubDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/TestDirectory2/SubDirectory
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2/SubDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/TestDirectory2
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2/SubDirectory/TestSubDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/TestDirectory2/SubDirectory
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2/SubDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/TestDirectory2
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2/SubDirectory/TestSubDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/TestDirectory2/SubDirectory
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2/SubDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/TestDirectory2
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2/SubDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/TestDirectory2
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2/SubDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/TestDirectory2
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2/SubDirectory/TestSubDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/TestDirectory2/SubDirectory
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2/SubDirectory/TestSubDirectory/SubSubDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/TestDirectory2/SubDirectory/TestSubDirectory
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2/SubDirectory/TestDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/TestDirectory2/SubDirectory
+IP: 127.0.0.1
+PORT: 51231
+SRC: TestDirectory2/SubDirectory/TestDirectory/SubDirectory
+DEST: /stud/cslec/209/marking/a4/repo_ameeral2/a4/TestDest/TestDirectory2/SubDirectory/TestDirectory
+IP: 127.0.0.1
+PORT: 51231
+Checking structure of copied directory ...
+[SUCCESS] File structure matches
+
+Checking structure of copied directory ...
+2c2
+< -rwx------ file1
+---
+> -rw------- file1
+4c4
+< -r-------- file3
+---
+> -rw------- file3
+14c14
+< -rwx------ file1
+---
+> -rw------- file1
+16c16
+< -r-------- file3
+---
+> -rw------- file3
+24c24
+< -rwx------ file1
+---
+> -rw------- file1
+26c26
+< -r-------- file3
+---
+> -rw------- file3
+30c30
+< -rwx------ file1
+---
+> -rw------- file1
+32c32
+< -r-------- file3
+---
+> -rw------- file3
+[ERROR] File structure or permissions fail to match
+
+Checking content of files ...
+Files TestDirectory2/SubDirectory/TestDirectory/SubDirectory/file2 and TestDest/TestDirectory2/SubDirectory/TestDirectory/SubDirectory/file2 differ
+[ERROR] File structure or content fails to match
+

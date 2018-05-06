@@ -1,0 +1,381 @@
+==========
+StudentID: ameeral2
+
+===== Testing compilation and error messages =====
+Test 1a: fcopy with illegal argument should print errors:
+T1a: failed
+
+Test 1b: fcopy with illegal destination should print errors:
+T1b: failed
+
+Test 2: Checking for invalid includes and use of goto:
+
+Test 3: Checking for uses of goto outside of error handling:
+
+Test 4: Checking size and hash before copying file:
+
+Test 5: Checking return values on syscalls and using perror:
+
+Test 6: Reading response to question about detecting hard links:
+
+===== Test Cases without Errors =====
+----------
+$ ls -Rali EmptyDirectory
+EmptyDirectory:
+total 8
+30693857 drwx------  2 209 108 4096 Apr  4 11:56 .
+30692497 drwx------ 10 209 108 4096 Apr  4 11:56 ..
+Copy completed successfully
+1 processes used
+
+Checking structure of copied directory ...
+[SUCCESS] File structure matches
+
+Checking structure of copied directory ...
+[SUCCESS] File structure and permissions match
+
+Checking content of files ...
+[SUCCESS] File content matches
+
+Checking number of processes used ...
+[SUCCESS] Number of processes used is as expected
+
+----------
+$ ls -Rali DirWithOneFile
+DirWithOneFile:
+total 12
+30693862 drwx------  2 209 108 4096 Apr  4 11:56 .
+30692497 drwx------ 11 209 108 4096 Apr  4 11:56 ..
+30693863 -rw-------  1 209 108  512 Apr  4 11:56 file1
+file1
+Copy completed successfully
+1 processes used
+
+Checking structure of copied directory ...
+[SUCCESS] File structure matches
+
+Checking structure of copied directory ...
+[SUCCESS] File structure and permissions match
+
+Checking content of files ...
+[SUCCESS] File content matches
+
+Checking number of processes used ...
+[SUCCESS] Number of processes used is as expected
+
+----------
+$ ls -Rali DirWithFiles
+DirWithFiles:
+total 20
+30960014 drwx------  2 209 108 4096 Apr  4 11:56 .
+30692497 drwx------ 11 209 108 4096 Apr  4 11:56 ..
+30960016 -rwxr-xr-x  1 209 108 1024 Apr  4 11:56 file1
+30960017 -rw-r--r--  1 209 108 1024 Apr  4 11:56 file2
+30960018 -r--r--r--  1 209 108 1024 Apr  4 11:56 file3
+file3
+file1
+file2
+Copy completed successfully
+1 processes used
+
+Checking structure of copied directory ...
+[SUCCESS] File structure matches
+
+Checking structure of copied directory ...
+2,4c2,4
+< -rwxr-xr-x file1
+< -rw-r--r-- file2
+< -r--r--r-- file3
+---
+> -rw------- file1
+> -rw------- file2
+> -rw------- file3
+[ERROR] File structure or permissions fail to match
+
+Checking content of files ...
+[SUCCESS] File content matches
+
+Checking number of processes used ...
+[SUCCESS] Number of processes used is as expected
+
+----------
+$ ls -Rali DirWithSubDir
+DirWithSubDir:
+total 12
+31084623 drwx------  3 209 108 4096 Apr  4 11:56 .
+30692497 drwx------ 11 209 108 4096 Apr  4 11:56 ..
+31214670 drwx------  2 209 108 4096 Apr  4 11:56 SubDir
+
+DirWithSubDir/SubDir:
+total 16
+31214670 drwx------ 2 209 108 4096 Apr  4 11:56 .
+31084623 drwx------ 3 209 108 4096 Apr  4 11:56 ..
+31214671 -rw------- 1 209 108 4096 Apr  4 11:56 file1
+31214672 -rw------- 1 209 108 1024 Apr  4 11:56 file2
+SubDir
+file1
+file2
+SubDir
+Copy completed successfully
+2 processes used
+
+Checking structure of copied directory ...
+[SUCCESS] File structure matches
+
+Checking structure of copied directory ...
+[SUCCESS] File structure and permissions match
+
+Checking content of files ...
+[SUCCESS] File content matches
+
+Checking number of processes used ...
+[SUCCESS] Number of processes used is as expected
+
+----------
+$ ls -Rali TestDirectory
+TestDirectory:
+total 24
+31214673 drwx------  3 209 108 4096 Apr  4 11:56 .
+30692497 drwx------ 11 209 108 4096 Apr  4 11:56 ..
+31214675 -rwx------  1 209 108 1024 Apr  4 11:56 file1
+31214676 -rw-------  1 209 108 1024 Apr  4 11:56 file2
+31214674 -r--------  1 209 108 1024 Apr  4 11:56 file3
+31344272 drwx------  2 209 108 4096 Apr  4 11:56 SubDirectory
+
+TestDirectory/SubDirectory:
+total 16
+31344272 drwx------ 2 209 108 4096 Apr  4 11:56 .
+31214673 drwx------ 3 209 108 4096 Apr  4 11:56 ..
+31344273 -rw------- 1 209 108  512 Apr  4 11:56 file1
+31344274 -rw------- 1 209 108 4096 Apr  4 11:56 file2
+file3
+file1
+file2
+SubDirectory
+file1
+file2
+file3
+file1
+file2
+SubDirectory
+Copy completed successfully
+2 processes used
+
+Checking structure of copied directory ...
+[SUCCESS] File structure matches
+
+Checking structure of copied directory ...
+2c2
+< -rwx------ file1
+---
+> -rw------- file1
+4c4
+< -r-------- file3
+---
+> -rw------- file3
+[ERROR] File structure or permissions fail to match
+
+Checking content of files ...
+[SUCCESS] File content matches
+
+Checking number of processes used ...
+[SUCCESS] Number of processes used is as expected
+
+----------
+$ ls -Rali TestDirectory2
+TestDirectory2:
+total 24
+31344275 drwx------  3 209 108 4096 Apr  4 11:56 .
+30692497 drwx------ 11 209 108 4096 Apr  4 11:56 ..
+31344277 -rwx------  1 209 108 1024 Apr  4 11:56 file1
+31344278 -rw-------  1 209 108 1024 Apr  4 11:56 file2
+31344276 -r--------  1 209 108 1024 Apr  4 11:56 file3
+31477824 drwx------  4 209 108 4096 Apr  4 11:56 SubDirectory
+
+TestDirectory2/SubDirectory:
+total 24
+31477824 drwx------ 4 209 108 4096 Apr  4 11:56 .
+31344275 drwx------ 3 209 108 4096 Apr  4 11:56 ..
+31477825 -rw------- 1 209 108  512 Apr  4 11:56 file1
+31477826 -rw------- 1 209 108 4096 Apr  4 11:56 file2
+31477827 drwx------ 3 209 108 4096 Apr  4 11:56 TestDirectory
+31610209 drwx------ 3 209 108 4096 Apr  4 11:56 TestSubDirectory
+
+TestDirectory2/SubDirectory/TestDirectory:
+total 24
+31477827 drwx------ 3 209 108 4096 Apr  4 11:56 .
+31477824 drwx------ 4 209 108 4096 Apr  4 11:56 ..
+31477829 -rwx------ 1 209 108 1024 Apr  4 11:56 file1
+31477830 -rw------- 1 209 108 1024 Apr  4 11:56 file2
+31477828 -r-------- 1 209 108 1024 Apr  4 11:56 file3
+31610206 drwx------ 2 209 108 4096 Apr  4 11:56 SubDirectory
+
+TestDirectory2/SubDirectory/TestDirectory/SubDirectory:
+total 16
+31610206 drwx------ 2 209 108 4096 Apr  4 11:56 .
+31477827 drwx------ 3 209 108 4096 Apr  4 11:56 ..
+31610207 -rw------- 1 209 108  512 Apr  4 11:56 file1
+31610208 -rw------- 1 209 108 4096 Apr  4 11:56 file2
+
+TestDirectory2/SubDirectory/TestSubDirectory:
+total 24
+31610209 drwx------ 3 209 108 4096 Apr  4 11:56 .
+31477824 drwx------ 4 209 108 4096 Apr  4 11:56 ..
+31610211 -rwx------ 1 209 108 1024 Apr  4 11:56 file1
+31610212 -rw------- 1 209 108 1024 Apr  4 11:56 file2
+31610210 -r-------- 1 209 108 1024 Apr  4 11:56 file3
+31728026 drwx------ 2 209 108 4096 Apr  4 11:56 SubSubDirectory
+
+TestDirectory2/SubDirectory/TestSubDirectory/SubSubDirectory:
+total 20
+31728026 drwx------ 2 209 108 4096 Apr  4 11:56 .
+31610209 drwx------ 3 209 108 4096 Apr  4 11:56 ..
+31728334 -rwx------ 1 209 108 1024 Apr  4 11:56 file1
+31728430 -rw------- 1 209 108 1024 Apr  4 11:56 file2
+31728331 -r-------- 1 209 108 1024 Apr  4 11:56 file3
+file3
+file1
+file2
+SubDirectory
+file1
+file2
+TestSubDirectory
+TestDirectory
+file3
+file1
+file2
+SubDirectory
+file1
+file2
+file3
+file1
+file2
+SubDirectory
+file1
+file2
+TestSubDirectory
+TestDirectory
+file3
+file1
+file2
+SubDirectory
+file3
+file1
+file2
+SubDirectory
+file1
+file2
+TestSubDirectory
+file3
+file1
+file2
+SubSubDirectory
+file3
+file1
+file2
+file3
+file1
+file2
+SubDirectory
+file1
+file2
+TestSubDirectory
+file3
+file1
+file2
+SubSubDirectory
+file3
+file1
+file2
+SubDirectory
+file1
+file2
+TestSubDirectory
+TestDirectory
+file3
+file1
+file2
+SubDirectory
+Copy completed successfully
+6 processes used
+
+Checking structure of copied directory ...
+[SUCCESS] File structure matches
+
+Checking structure of copied directory ...
+2c2
+< -rwx------ file1
+---
+> -rw------- file1
+4c4
+< -r-------- file3
+---
+> -rw------- file3
+14c14
+< -rwx------ file1
+---
+> -rw------- file1
+16c16
+< -r-------- file3
+---
+> -rw------- file3
+24c24
+< -rwx------ file1
+---
+> -rw------- file1
+26c26
+< -r-------- file3
+---
+> -rw------- file3
+30c30
+< -rwx------ file1
+---
+> -rw------- file1
+32c32
+< -r-------- file3
+---
+> -rw------- file3
+[ERROR] File structure or permissions fail to match
+
+Checking content of files ...
+[SUCCESS] File content matches
+
+Checking number of processes used ...
+[SUCCESS] Number of processes used is as expected
+
+===== Test Cases with Errors =====
+----------
+$ ls -Rali DirWithSymLink
+DirWithSymLink:
+total 12
+31080731 drwx------  2 209 108 4096 Apr  4 11:56 .
+30692497 drwx------ 11 209 108 4096 Apr  4 11:56 ..
+31084610 -rw-------  1 209 108 1024 Apr  4 11:56 file1
+31084622 lrwxrwxrwx  1 209 108    5 Apr  4 11:56 symlink1 -> file1
+symlink1
+file1
+Copy completed successfully
+1 processes used
+
+Checking structure of copied directory ...
+5d4
+< symlink1
+[SUCCESS] File structure fails to match
+
+----------
+$ ls -Rali DirWithDotFile
+DirWithDotFile:
+total 16
+30960036 drwx------  2 209 108 4096 Apr  4 11:56 .
+30692497 drwx------ 11 209 108 4096 Apr  4 11:56 ..
+30960037 -rw-------  1 209 108 1024 Apr  4 11:56 file1
+30960038 -rw-------  1 209 108 1024 Apr  4 11:56 .file1
+file1
+Copy completed successfully
+1 processes used
+
+Checking structure of copied directory ...
+5d4
+< .file1
+[SUCCESS] File structure fails to match
+
